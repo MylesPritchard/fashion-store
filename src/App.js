@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from "react";
+import { RoleWrapper } from "./RoleWrapper/RoleWrapper";
+import { LoginForm } from "./LoginForm/LoginForm.js";
+import { ClothingList } from "./ClothingList/ClothingList.js";
+import { UpdateClothing } from  "./UpdateClothing/UpdateClothing.js";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  console.log("App rendered");
+
+  const [role, setRole] = useState("");
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+      <LoginForm setRole={setRole} />
+      <RoleWrapper rolesAllowed={["Visitor"]} currentRole={role}>
+        <ClothingList />
+      </RoleWrapper>
+      <RoleWrapper rolesAllowed={["Admin"]} currentRole={role}> 
+        <UpdateClothing />
+      </RoleWrapper>
     </div>
   );
 }
